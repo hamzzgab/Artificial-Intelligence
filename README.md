@@ -1,9 +1,9 @@
 # Artificial-Intelligence
 
 ## TODO
-- [ ] DFS 
-- [ ] BFS
-- [ ] A*
+- [x] DFS 
+- [x] BFS
+- [x] A*
 - [ ] MDP
   - [ ] Value Iteration
   - [ ] Policy Iteration
