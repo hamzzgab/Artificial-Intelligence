@@ -16,17 +16,17 @@ m.tracePath({a: p})
 m.run()
 """
 
-GOAL = {'x': 1,
-        'y': 1}
+GOAL = {'x': 25,
+        'y': 25}
 
 # -----------------MAZE----------------------
-m = maze(rows=150, cols=150)
+m = maze(rows=100, cols=100)
 m.CreateMaze(x=GOAL['x'], y=GOAL['y'], pattern=None,
              theme=COLOR.light, loopPercent=100,
              saveMaze=False)
 
 # -----------------ALGO----------------------
-SearchAlgo.NODES = 'ESNW'
+SearchAlgo.NODES = 'SNWE'
 
 DFS = SearchAlgo.DFS(m=m, goal=GOAL)
 DFS.set_params()
@@ -53,7 +53,7 @@ b = agent(parentMaze=m,
 
 a = agent(parentMaze=m,
           x=None, y=None,
-          shape='square', footprints=True, filled=True,
+          shape='square', footprints=True, filled=False,
           color=COLOR.green)
 
 # -----------------PATH----------------------
@@ -64,20 +64,28 @@ aStarPath = AStar.get_forward_path()
 # | Marking cells that are visited
 # m.markCells = list(set(dfsPath.values()).intersection(set(bfsPath.values())))
 
+
 # -----------------TIMING--------------------
-print(timeit.timeit(DFS.search_path, number=1000, globals=globals()))
-print(timeit.timeit(BFS.search_path, number=1000, globals=globals()))
-print(timeit.timeit(AStar.search_path, number=1000, globals=globals()))
+def get_time(function):
+    return timeit.timeit(function, number=1000, globals=globals())
+
+
+calcDFSTime = round(get_time(DFS.search_path) + get_time(DFS.get_forward_path), 3)
+calcBFSTime = round(get_time(BFS.search_path) + get_time(BFS.get_forward_path), 3)
+calcAStarTime = round(get_time(AStar.search_path) + get_time(AStar.get_forward_path), 3)
 
 # -----------------TEXT----------------------
 totalDFSPath = textLabel(m, f'DFS Path', len(dfsPath) + 1)
-totalDFSSearchedPath = textLabel(m, f'DFS Path', len(DFS.searchedPath) + 1)
+totalDFSSearchedPath = textLabel(m, f'DFS Searched Path', len(DFS.searchedPath) + 1)
+totalDFSTime = textLabel(m, f'DFS Time', calcDFSTime)
 
 totalBFSPath = textLabel(m, f'BFS Path', len(bfsPath) + 1)
 totalBFSSearchedPath = textLabel(m, f'BFS Searched Path', len(BFS.searchedPath) + 1)
+totalBFSTime =  textLabel(m, f'BFS Time', calcBFSTime)
 
 totalAStarPath = textLabel(m, f'A* Path', len(aStarPath) + 1)
 totalAStarSearchedPath = textLabel(m, f'A* Searched Path', len(AStar.searchedPath) + 1)
+totalAStarTime =  textLabel(m, f'A* Time', calcAStarTime)
 
 # ----------------TRACING--------------------
 m.tracePath({
