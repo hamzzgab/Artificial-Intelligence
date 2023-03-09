@@ -5,7 +5,25 @@ def set_values():
     print("(rows, cols) = ({}, {})".format(ent_rows.get(), ent_cols.get()))
     print("(x, y) = ({}, {})".format(ent_goalX.get(), ent_goalY.get()))
 
+
+def check_changed():
     print("Run Together: {}".format(CheckRunMode.get()))
+    if CheckRunMode.get():
+        listbox.configure(state=NORMAL)
+        listbox.configure(exportselection=False)
+    else:
+        AlgoRunning.set("All Search Algorithms \nwill run Individually")
+        listbox.configure(state=DISABLED)
+
+
+def listbox_used(event):
+
+    selected_values = [listbox.get(i) for i in listbox.curselection()]
+    char = ""
+
+    if len(selected_values) > 1:
+        char = "s"
+    AlgoRunning.set("Running Algo{}:\n".format(char) + ", ".join(selected_values))
 
 
 # ---------------WINDOW----------------------
@@ -76,31 +94,23 @@ frm_algo = Frame(master=window, relief=RAISED,padx=5, pady=5, highlightbackgroun
 
 lbl_algo = Label(master=frm_algo, text='Search Algorithm', font='Helvetica 18 bold', foreground='#ecfc03')
 lbl_algos = Label(master=frm_algo, text='Run Algos', font='Helvetica 14 bold', foreground='#ecfc03')
-AlgoRunning = StringVar()
-lbl_algosRunning = Label(master=frm_algo, textvariable=AlgoRunning, font='Helvetica 12 bold', foreground='#ecfc03', )
 
-CheckRunMode = IntVar()
-chk_runMode = Checkbutton(master=frm_algo, text='Run Together', variable=CheckRunMode, onvalue=1, offvalue=0)
+AlgoRunning = StringVar(value="Running Algos:\nDFS, BFS")
+lbl_algosRunning = Label(master=frm_algo, textvariable=AlgoRunning, font='Helvetica 14', foreground='#ecfc03', height=8)
 
-def listbox_used(event):
-    # print(' '.join([algo for algos in selected_values]))
-    selected_values = [listbox.get(i) for i in listbox.curselection()]
-    char = ""
-
-    if len(selected_values) > 1:
-        char = "s"
-    AlgoRunning.set("Running Algo{}: ".format(char) + ", ".join(selected_values))
+CheckRunMode = IntVar(value=1)
+chk_runMode = Checkbutton(master=frm_algo, text='Run Together', variable=CheckRunMode, onvalue=1, offvalue=0, command=check_changed)
 
 
-listbox = Listbox(master=frm_algo, height=3, selectmode='multiple')
+listbox = Listbox(master=frm_algo, height=3, selectmode='multiple', selectforeground='white', selectbackground='green',
+                  activestyle='none')
 algos = ['DFS', 'BFS', 'AStar']
 
 for algo in algos:
     listbox.insert(algos.index(algo), algo)
+    if algos.index(algo) < 2:
+        listbox.selection_set(algos.index(algo))
 listbox.bind('<<ListboxSelect>>', listbox_used)
-
-
-
 
 
 # | DRAW
@@ -112,7 +122,7 @@ lbl_algos.grid(column=0, row=3, sticky='nw', pady=10)
 
 listbox.grid(column=0, row=7, sticky='nw')
 
-lbl_algosRunning.grid(column=0, row=8)
+lbl_algosRunning.grid(column=0, row=8, sticky='nsew')
 
 frm_algo.grid(column=1, row=0, sticky='nsew', padx=5)
 
