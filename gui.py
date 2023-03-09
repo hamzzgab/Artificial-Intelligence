@@ -1,5 +1,13 @@
 from tkinter import *
 
+
+def set_values():
+    print("(rows, cols) = ({}, {})".format(ent_rows.get(), ent_cols.get()))
+    print("(x, y) = ({}, {})".format(ent_goalX.get(), ent_goalY.get()))
+
+    print("Run Together: {}".format(CheckRunMode.get()))
+
+
 # ---------------WINDOW----------------------
 window = Tk()
 window.title('CS7IS2 - Assignment - 1')
@@ -67,24 +75,44 @@ window.rowconfigure(0, weight=1, minsize=200)
 frm_algo = Frame(master=window, relief=RAISED,padx=5, pady=5, highlightbackground="#ecfc03", highlightthickness=2)
 
 lbl_algo = Label(master=frm_algo, text='Search Algorithm', font='Helvetica 18 bold', foreground='#ecfc03')
-
-chk_runMode = Checkbutton(master=frm_algo, text='Run Together')
-
 lbl_algos = Label(master=frm_algo, text='Run Algos', font='Helvetica 14 bold', foreground='#ecfc03')
+AlgoRunning = StringVar()
+lbl_algosRunning = Label(master=frm_algo, textvariable=AlgoRunning, font='Helvetica 12 bold', foreground='#ecfc03', )
 
-chk_dfs = Checkbutton(master=frm_algo, text='DFS')
-chk_bfs = Checkbutton(master=frm_algo, text='BFS')
-chk_aStar = Checkbutton(master=frm_algo, text='AStar')
+CheckRunMode = IntVar()
+chk_runMode = Checkbutton(master=frm_algo, text='Run Together', variable=CheckRunMode, onvalue=1, offvalue=0)
 
+def listbox_used(event):
+    # print(' '.join([algo for algos in selected_values]))
+    selected_values = [listbox.get(i) for i in listbox.curselection()]
+    char = ""
+
+    if len(selected_values) > 1:
+        char = "s"
+    AlgoRunning.set("Running Algo{}: ".format(char) + ", ".join(selected_values))
+
+
+listbox = Listbox(master=frm_algo, height=3, selectmode='multiple')
+algos = ['DFS', 'BFS', 'AStar']
+
+for algo in algos:
+    listbox.insert(algos.index(algo), algo)
+listbox.bind('<<ListboxSelect>>', listbox_used)
+
+
+
+
+
+# | DRAW
 lbl_algo.grid(column=0, row=0)
 
 chk_runMode.grid(column=0, row=2, sticky='nw')
 
 lbl_algos.grid(column=0, row=3, sticky='nw', pady=10)
 
-chk_dfs.grid(column=0, row=4, sticky='nw')
-chk_bfs.grid(column=0, row=5, sticky='nw')
-chk_aStar.grid(column=0, row=6, sticky='nw')
+listbox.grid(column=0, row=7, sticky='nw')
+
+lbl_algosRunning.grid(column=0, row=8)
 
 frm_algo.grid(column=1, row=0, sticky='nsew', padx=5)
 
@@ -101,7 +129,7 @@ lbl_mdp.grid(column=0, row=0)
 frm_mdp.grid(column=0, row=1, sticky='nsew', columnspan=2, padx=5, pady=4)
 
 # -------------------RUN-----------------------
-btn_run = Button(text='RUN', fg='green')
+btn_run = Button(text='RUN', fg='green', command=set_values)
 btn_run.grid(column=0, row=2, sticky='nsew', columnspan=2)
 
 window.mainloop()
