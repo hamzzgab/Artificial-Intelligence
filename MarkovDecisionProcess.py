@@ -34,16 +34,16 @@ class MarkovDecisionProcess:
         # SET HEURISTICS
         for key, val in self.actions.items():
             for k, v in val.items():
+                # DETERMINISTIC
                 if k == 'N':
-                    val[k] = 0.8
+                    val[k] = 1
                 elif k == 'W':
-                    val[k] = 0
+                    val[k] = 1
                 elif k == 'E':
-                    val[k] = 0
+                    val[k] = 1
                 elif k == 'S':
-                    val[k] = 0.2
+                    val[k] = 1
 
-    # CHECK MOVEMENT OF THE NODE
     def move(self, currentNode, direction):
         if direction == 'E':
             return currentNode[0], currentNode[1] + 1
