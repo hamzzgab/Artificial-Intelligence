@@ -15,8 +15,6 @@ class SearchAlgo:
         self.m = m
         if goal is None:
             raise AssertionError("Goal Cannot be None")
-        if type(goal) is not type({}):
-            raise AssertionError(f"Goal of Incorrect Type:\n\tExpected: {type({})}\n\tGot: {type(goal)}")
         self.goal = goal
         self.algo = algo
 
@@ -38,7 +36,7 @@ class SearchAlgo:
         self.algoPath = {}
         self.searchedPath = []
         self.forward_path = {}
-        self.forwardPathCell = (goal['x'], goal['y'])
+        self.forwardPathCell = self.goal
 
     def set_params(self):
         if self.algo in ['dfs', 'bfs']:
@@ -96,7 +94,7 @@ class SearchAlgo:
             if self.algo in ['dfs', 'a*']:
                 self.set_searched_path()
 
-            if self.currCell == (self.goal['x'], self.goal['y']):
+            if self.currCell == self.goal:
                 break
 
             for d in self.nodes:

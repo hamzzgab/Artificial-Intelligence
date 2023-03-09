@@ -1,9 +1,14 @@
 from tkinter import *
 
+rows, cols = (25, 25)
+goal_x, goal_y = (1, 1)
+
 
 def set_values():
-    print("(rows, cols) = ({}, {})".format(ent_rows.get(), ent_cols.get()))
-    print("(x, y) = ({}, {})".format(ent_goalX.get(), ent_goalY.get()))
+    global rows, cols, goal_x, goal_y
+    rows, cols = ent_rows.get(), ent_cols.get()
+    goal_x, goal_x = ent_goalX.get(), ent_goalY.get()
+    window.destroy()
 
 
 def check_changed():
@@ -35,14 +40,12 @@ window.maxsize(width=380, height=380)
 window.config(pady=5, bg='#252527')
 
 
-# ----------------FRAME-----------------------
+# -----------------MAZE------------------------
 window.columnconfigure(0, weight=1, minsize=170)
 window.rowconfigure(0, weight=1, minsize=200)
 
-rows, cols = (25, 25)
-goal_x, goal_y = (1, 1)
 
-frm_maze = Frame(master=window, relief=RIDGE, padx=5, pady=5, highlightbackground="#03cafc", highlightthickness=2, bg='#252527')
+frm_maze = Frame(master=window, relief=RAISED, padx=5, pady=5, highlightbackground="#03cafc", highlightthickness=2, bg='#252527')
 
 lbl_maze = Label(master=frm_maze, text='Maze Parameters', font='Helvetica 18 bold', foreground='#03cafc', bg='#252527')
 
@@ -91,7 +94,7 @@ frm_maze.grid(column=0, row=0, sticky='nsew', padx=5)
 window.columnconfigure(1, weight=1, minsize=170)
 window.rowconfigure(0, weight=1, minsize=200)
 
-frm_algo = Frame(master=window, relief=RAISED,padx=5, pady=5, highlightbackground="#ecfc03", highlightthickness=2,
+frm_algo = Frame(master=window, relief=RAISED, padx=5, pady=5, highlightbackground="#ecfc03", highlightthickness=2,
                  bg='#252527')
 
 lbl_algo = Label(master=frm_algo, text='Search Algorithm', font='Helvetica 18 bold', foreground='#ecfc03', bg='#252527')
@@ -99,7 +102,7 @@ lbl_algos = Label(master=frm_algo, text='Run Algos', font='Helvetica 14 bold', f
 
 AlgoRunning = StringVar(value="Running Algos:\nDFS, BFS")
 lbl_algosRunning = Label(master=frm_algo, textvariable=AlgoRunning, font='Helvetica 14', foreground='#ecfc03',
-                         height=8, bg='#252527')
+                         height=6, bg='#252527')
 
 CheckRunMode = IntVar(value=1)
 chk_runMode = Checkbutton(master=frm_algo, text='Run Together', variable=CheckRunMode, onvalue=1, offvalue=0,
@@ -116,17 +119,17 @@ for algo in algos:
         listbox.selection_set(algos.index(algo))
 listbox.bind('<<ListboxSelect>>', listbox_used)
 
+btn_runAlgos = Button(master=frm_algo, text='RUN ALGOS', fg='green', command=set_values, bg='#252527',
+                      highlightbackground='#252527')
 
 # | DRAW
 lbl_algo.grid(column=0, row=0, sticky='nw')
-
 chk_runMode.grid(column=0, row=2, sticky='nw')
-
 lbl_algos.grid(column=0, row=3, sticky='nw', pady=10)
-
 listbox.grid(column=0, row=7, sticky='nw')
-
 lbl_algosRunning.grid(column=0, row=8, sticky='nsew')
+btn_runAlgos.grid(column=0, row=9, sticky='nsew')
+
 
 frm_algo.grid(column=1, row=0, sticky='nsew', padx=5)
 
@@ -138,12 +141,16 @@ frm_mdp = Frame(master=window, relief=RAISED, padx=5, pady=5, highlightbackgroun
 
 lbl_mdp = Label(master=frm_mdp, text='Markov Decision Process', font='Helvetica 18 bold', foreground='#ff0000', bg='#252527')
 
-lbl_mdp.grid(column=0, row=0)
+btn_runMDP = Button(master=frm_mdp, text='RUN Markov', fg='green', command=set_values, width=36,
+                    bg='#252527', highlightbackground='#252527')
+
+lbl_mdp.grid(column=0, row=0, sticky='nw')
+
+window.rowconfigure(1, weight=1)
+btn_runMDP.grid(column=0, row=1, sticky='nsew')
 
 frm_mdp.grid(column=0, row=1, sticky='nsew', columnspan=2, padx=5, pady=4)
 
 # -------------------RUN-----------------------
-btn_run = Button(text='RUN', fg='green', command=set_values, bg='#252527', highlightbackground='#252527')
-btn_run.grid(column=0, row=2, sticky='nsew', columnspan=2)
 
 window.mainloop()
