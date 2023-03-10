@@ -13,4 +13,5 @@ The code will display a _GUI_ where parameters can be changed such as:
 2. Goal Location
 3. The algorithms to run together
 
-![GUI.png](images%2FGUI.png)
+<img src="./images/GUI.png" height="200">
+
