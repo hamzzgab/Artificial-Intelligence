@@ -45,23 +45,36 @@ The selected algorithms will run together
 1. `Value Iteration - Selected`
 2. `Policy Iteration - Selected`
 
-### Search Algorithms
+## Search Algorithms
 
 To run the select the checkboxes from the Search Algorithm section and click on the Run Algos button. It will run the selected algorithm using the rows, cols as the grid size and the reach to the specified goal.
+- Select any algorithm from the checkboxes
+- Click on `RUN ALGOS`
+- The code will open a new window on which the search algorithm will run
+
+<img src="./images/GUI-DFS.png" height="400">
 
 #### Analysis Parameters
-To compare the 3 algorithms I have used 3 metrics
+To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 1. Final Path
 2. Searched Path
 3. Time Taken
 
-#### 1. Depth First Search
-- Select only the DFS checkbox
-- Click on `RUN ALGOS`
-
-<img src="./images/GUI-DFS.png" height="400">
-
-- The code will open a new window on which the DFS Algorithm will run
+### 1. Depth First Search
+1. Final Path - 53
+2. Searched Path - 626
+3. Time Taken - 0.0067s
 <img height="400" src="./images/DFS.png"/>
 
 
+### 2. Breadth First Search
+1. Final Path - 49
+2. Searched Path - 625
+3. Time Taken - 0.0002
+<img height="400" src="./images/BFS.png"/>
+
+### 3. AStar
+1. Final Path - 49
+2. Searched Path - 691
+3. Time Taken - 0.0008
+<img height="400" src="./images/AStar.png"/>
