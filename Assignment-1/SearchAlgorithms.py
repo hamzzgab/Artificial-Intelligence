@@ -1,12 +1,12 @@
 from queue import PriorityQueue
-
+import time
 NODES = 'ESNW'
 
 
 def calculateManhattanDistance(x, y=(1, 1)):
     x1, y1 = x
     x2, y2 = y
-    return abs(x1 - y2) + abs(x2 - y2)
+    return abs(x1 - x2) + abs(y1 - y2)
 
 
 class SearchAlgo:
@@ -34,9 +34,13 @@ class SearchAlgo:
 
         # | PATHS
         self.algoPath = {}
-        self.searchedPath = []
+        self.searchedPath = [self.start]
         self.forward_path = {}
         self.forwardPathCell = self.goal
+
+        self.i = 0
+
+        # self.mainTime = 0
 
     def set_params(self):
         if self.algo in ['dfs', 'bfs']:
@@ -44,8 +48,6 @@ class SearchAlgo:
             self.frontier = [self.start]
 
         elif self.algo in 'a*':
-            self.searchedPath = [self.start]
-
             self.g_score = {cell: float('inf') for cell in self.m.grid}
             self.f_score = {cell: float('inf') for cell in self.m.grid}
 
@@ -57,8 +59,8 @@ class SearchAlgo:
         else:
             raise AssertionError("Algorithm specified incorrectly")
 
-    def set_searched_path(self):
-        self.searchedPath.append(self.currCell)
+    def set_searched_path(self, node):
+        self.searchedPath.append(node)
 
     def get_stopping_condition(self):
         if self.algo in ['dfs', 'bfs']:
@@ -88,13 +90,18 @@ class SearchAlgo:
                 return self.currCell[0], self.currCell[1] - 1
 
     def search_path(self):
+        start = time.time()
+        self.i = 0
+        # self.searchedPath = [self.start]
         while self.get_stopping_condition():
             self.currCell = self.get_current_cell()
 
             if self.algo in ['dfs', 'a*']:
-                self.set_searched_path()
+                self.i += 1
+                self.set_searched_path(self.currCell)
 
             if self.currCell == self.goal:
+                print(self.algo, self.i)
                 break
 
             for d in self.nodes:
@@ -117,8 +124,10 @@ class SearchAlgo:
                         self.frontier.append(child)
                         self.algoPath[child] = self.currCell
 
-                        if self.algo == 'bfs':
-                            self.set_searched_path()
+                    if self.algo == 'bfs':
+                        self.i += 1
+                        self.set_searched_path(child)
+
                     elif self.algo == 'a*':
                         temp_g_score = self.g_score[self.currCell] + 1
                         temp_f_score = temp_g_score + calculateManhattanDistance(child)
@@ -129,11 +138,18 @@ class SearchAlgo:
                             self.store.put((temp_f_score, calculateManhattanDistance(child), child))
                             self.algoPath[child] = self.currCell
 
+        end = time.time()
+        self.mainTime = end - start
+
     def get_forward_path(self):
+        start = time.time()
         while self.forwardPathCell != self.start:
             self.forward_path[self.algoPath[self.forwardPathCell]] = self.forwardPathCell
             self.forwardPathCell = self.algoPath[self.forwardPathCell]
-        return self.forward_path
+        end = time.time()
+
+        self.mainTime = end - start
+        return self.forward_path, self.i, self.mainTime
 
 
 class DFS(SearchAlgo):

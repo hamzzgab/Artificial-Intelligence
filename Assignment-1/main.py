@@ -15,7 +15,7 @@ def get_time(function):
 # -----------------MAZE----------------------
 m = maze(rows=rows, cols=cols)
 m.CreateMaze(x=goal_x, y=goal_y, pattern=None,
-             theme=COLOR.light, loopPercent=100)
+             theme=COLOR.light, loopPercent=0)
 # saveMaze=True)
 # loadMaze=f'SavedMazes/Algorithms/{gui.AlgoMaze}')
 
@@ -34,7 +34,7 @@ if gui.run_search_algos:
             DFS = Algo.DFS(m=m, goal=GOAL)
             DFS.set_params()
             DFS.search_path()
-            dfsPath = DFS.get_forward_path()
+            dfsPath, dfsSearchedPath, calcDFSTime = DFS.get_forward_path()
 
             d = agent(parentMaze=m,
                       x=None, y=None,
@@ -43,18 +43,18 @@ if gui.run_search_algos:
 
             agents[0] = d
 
-            calcDFSTime = round(get_time(DFS.search_path) + get_time(DFS.get_forward_path), 4)
+            # calcDFSTime = round(get_time(DFS.search_path) + get_time(DFS.get_forward_path), 4)
 
             totalDFSPath = textLabel(m, f'DFS Path', len(dfsPath) + 1)
-            totalDFSSearchedPath = textLabel(m, f'DFS Searched Path', len(DFS.searchedPath) + 1)
-            totalDFSTime = textLabel(m, f'DFS Time', calcDFSTime)
+            totalDFSSearchedPath = textLabel(m, f'DFS Searched Path', dfsSearchedPath)
+            totalDFSTime = textLabel(m, f'DFS Time', round(calcDFSTime * 1000, 4))
 
         # -----------------BFS-----------------------
         if idx == 1 and val:
             BFS = Algo.BFS(m=m, goal=GOAL)
             BFS.set_params()
             BFS.search_path()
-            bfsPath = BFS.get_forward_path()
+            bfsPath, bfsSearchedPath, calcBFSTime = BFS.get_forward_path()
 
             b = agent(parentMaze=m,
                       x=None, y=None,
@@ -63,18 +63,18 @@ if gui.run_search_algos:
 
             agents[1] = b
 
-            calcBFSTime = round(get_time(BFS.search_path) + get_time(BFS.get_forward_path), 4)
+            # calcBFSTime = round(get_time(BFS.search_path) + get_time(BFS.get_forward_path), 4)
 
             totalBFSPath = textLabel(m, f'BFS Path', len(bfsPath) + 1)
-            totalBFSSearchedPath = textLabel(m, f'BFS Searched Path', len(BFS.searchedPath) + 1)
-            totalBFSTime = textLabel(m, f'BFS Time', calcBFSTime)
+            totalBFSSearchedPath = textLabel(m, f'BFS Searched Path', bfsSearchedPath)
+            totalBFSTime = textLabel(m, f'BFS Time', round(calcBFSTime * 1000, 4))
 
         # -----------------A*------------------------
         if idx == 2 and val:
             AStar = Algo.AStar(m=m, goal=GOAL)
             AStar.set_params()
             AStar.search_path()
-            aStarPath = AStar.get_forward_path()
+            aStarPath, aStarSearchedPath, calcAStarTime = AStar.get_forward_path()
 
             a = agent(parentMaze=m,
                       x=None, y=None,
@@ -83,11 +83,11 @@ if gui.run_search_algos:
 
             agents[2] = a
 
-            calcAStarTime = round(get_time(AStar.search_path) + get_time(AStar.get_forward_path), 4)
+            # calcAStarTime = round(get_time(AStar.search_path) + get_time(AStar.get_forward_path), 4)
 
             totalAStarPath = textLabel(m, f'A* Path', len(aStarPath) + 1)
-            totalAStarSearchedPath = textLabel(m, f'A* Searched Path', len(AStar.searchedPath) + 1)
-            totalAStarTime = textLabel(m, f'A* Time', calcAStarTime)
+            totalAStarSearchedPath = textLabel(m, f'A* Searched Path', aStarSearchedPath)
+            totalAStarTime = textLabel(m, f'A* Time', round(calcAStarTime * 1000, 4))
 
     tracingDict = {}
     for i, val in enumerate([dfsPath, bfsPath, aStarPath]):
