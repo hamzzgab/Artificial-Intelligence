@@ -21,7 +21,7 @@ m.CreateMaze(x=goal_x, y=goal_y, pattern=None,
 
 if gui.run_search_algos:
     # -----------------ALGO----------------------
-    Algo.NODES = 'SNWE'
+    Algo.NODES = 'EWSN'
 
     dfsPath = None
     bfsPath = None
@@ -101,21 +101,52 @@ if gui.run_search_algos:
     m.run()
 
 if gui.run_mdp_algo:
-    trackVI = ValueIteration(m, GOAL, isDeterministic=gui.SetDeterministic)
-    trackPI = PolicyIteration(m, GOAL, isDeterministic=gui.SetDeterministic)
+    # -----------------ALGO----------------------
+    setDeterministic = True
 
     # -----------------AGENT---------------------
-    v = agent(m, shape='arrow', footprints=True, color=COLOR.red)
-    p = agent(m, shape='arrow', footprints=True, color=COLOR.blue)
+    agents = [0, 0]
 
+    pathVI = None
+    pathPI = None
     # -----------------PATH----------------------
-    pathVI = trackVI.create_searchPath((rows, cols))
-    pathPI = trackPI.create_searchPath((rows, cols))
+    if gui.SetValueIteration:
+        trackVI = ValueIteration(m, GOAL, isDeterministic=setDeterministic)
+        trackVI.calculate_valueIteration()
+
+        v = agent(m, shape='square', footprints=True, color=COLOR.red)
+
+        agents[0] = v
+
+        pathVI, timeVI = trackVI.create_searchPath((rows, cols))
+
+        timeVI += get_time(trackVI.calculate_valueIteration)
+        totalVITime = textLabel(m, f'Value Iteration Time', round(timeVI, 4))
+        totalVIPath = textLabel(m, f'Value Iteration Path', len(pathVI) + 1)
+
+    if gui.SetPolicyIteration:
+        trackPI = PolicyIteration(m, GOAL, isDeterministic=setDeterministic)
+        trackPI.calculate_policyIteration()
+
+        p = agent(m, shape='square', filled=True, footprints=True, color=COLOR.blue)
+
+        agents[1] = p
+
+        pathPI, timePI = trackPI.create_searchPath((rows, cols))
+
+        timePI += get_time(trackPI.calculate_policyIteration)
+
+        totalPIPath = textLabel(m, f'Policy Iteration Path', len(pathPI) + 1)
+        totalPITime = textLabel(m, f'Policy Iteration Time', round(timePI, 4))
+
+    tracingDict = {}
+    for i, val in enumerate([pathVI, pathPI]):
+        if val is not None:
+            print(val, i)
+            tracingDict[agents[i]] = val
 
     # ----------------TRACING--------------------
-    m.tracePath({v: pathVI, p: pathPI},
-                delay=100, kill=False,
-                showMarked=True)
+    m.tracePath(tracingDict, delay=200)
     m.run()
 
 

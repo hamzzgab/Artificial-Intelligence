@@ -1,4 +1,4 @@
-import random
+import random, time
 
 
 class MarkovDecisionProcess:
@@ -70,7 +70,7 @@ class ValueIteration(MarkovDecisionProcess):
         self.tracePath = {}
 
         self.explored = []
-        self.calculate_valueIteration()
+        # self.calculate_valueIteration()
 
     def get_maxDelta(self, delta, utilityMax, state):
         return max(delta, abs(utilityMax - self.utilities[state]))
@@ -89,9 +89,11 @@ class ValueIteration(MarkovDecisionProcess):
                             stateNext = self.move(state, direction)
                     reward = self._reward
                     if stateNext == self.target[0]:
-                        reward = 1000
+                        reward = 10000
                     utility = 0
+                    # utility += prob * (reward + self._discount * self.utilities[stateNext])
                     utility += super().calculate_ValueIterationUtility(prob, reward, stateNext, self.utilities)
+
                     if utility > utilityMax:
                         utilityMax = utility
                         actionMax = action
@@ -104,6 +106,7 @@ class ValueIteration(MarkovDecisionProcess):
                 break
 
     def create_searchPath(self, currNode):
+        start = time.time()
         node = currNode
 
         while True:
@@ -129,7 +132,8 @@ class ValueIteration(MarkovDecisionProcess):
             self.explored.append(node)
             self.tracePath[node] = bestNode
             node = bestNode
-        return self.tracePath
+        end = time.time()
+        return self.tracePath, end-start
 
 
 class PolicyIteration(MarkovDecisionProcess):
@@ -137,6 +141,7 @@ class PolicyIteration(MarkovDecisionProcess):
 
         super().__init__(m, goal, isDeterministic)
 
+        self._discount = 0.8
         self.theta = 0.001
 
         self.target = [self.goal]
@@ -151,7 +156,7 @@ class PolicyIteration(MarkovDecisionProcess):
 
         self.tracePath = {}
 
-        self.calculate_policyIteration()
+        # self.calculate_policyIteration()
 
     def calculate_policyIteration(self):
         isPolicyChanged = True
@@ -178,9 +183,11 @@ class PolicyIteration(MarkovDecisionProcess):
 
                         reward = self._reward[state]
                         if next_state == self.target[0]:
-                            reward = pow(10, 7)
+                            reward = pow(10, 9)
 
-                        utility = self._reward[state] + self._discount * (prob * self.utilities[next_state])
+                        # utility = self._reward[state] + self._discount * (prob * self.utilities[next_state])
+                        utility = super().calculate_PolicyIterationUtility(prob, self._reward, state, next_state,
+                                                                           self.utilities)
 
                         if utility > max_utility:
                             max_utility = utility
@@ -194,11 +201,13 @@ class PolicyIteration(MarkovDecisionProcess):
                             self.policy_values[state] = max_action
 
     def create_searchPath(self, currNode):
+        start = time.time()
         node = currNode
 
         while node != self.target[0]:
             test = self.move(node, self.policy_values[node])
             self.tracePath[node] = test
             node = test
+        end = time.time()
 
-        return self.tracePath
+        return self.tracePath, end-start

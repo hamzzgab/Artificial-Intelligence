@@ -11,11 +11,19 @@ SearchAlgoMaze = None
 AlgoRun = []
 SetDeterministic = True
 
+SetValueIteration = True
+SetPolicyIteration = True
+
 
 def set_values():
     global rows, cols, goal_x, goal_y
     rows, cols = ent_rows.get(), ent_cols.get()
     goal_x, goal_y = ent_goalX.get(), ent_goalY.get()
+
+    global SetDeterministic, SetPolicyIteration, SetValueIteration
+    SetDeterministic = CheckDeterministic.get()
+    SetValueIteration = CheckValueIteration.get()
+    SetPolicyIteration = CheckPolicyIteration.get()
 
 
 def run_search_algo():
@@ -33,9 +41,11 @@ def run_search_mdp():
 
 
 def check_changed():
-    global AlgoRun, SetDeterministic
+    global AlgoRun, SetDeterministic, SetPolicyIteration, SetValueIteration
     AlgoRun =[CheckRunDFS.get(), CheckRunBFS.get(), CheckRunAStar.get()]
     SetDeterministic = CheckDeterministic.get()
+    SetValueIteration = CheckValueIteration.get()
+    SetPolicyIteration = CheckPolicyIteration.get()
 
 
 # ---------------WINDOW----------------------
@@ -169,32 +179,32 @@ frm_mdp = Frame(master=window, relief=RAISED, padx=5, pady=5, highlightbackgroun
 lbl_mdp = Label(master=frm_mdp, text='Markov Decision', font='Helvetica 18 bold', foreground='#ff0000',
                 bg='#252527')
 
+CheckValueIteration = IntVar(value=1)
+chk_valueIteration = Checkbutton(master=frm_mdp, text='Value', variable=CheckValueIteration, onvalue=1,
+                                 offvalue=0, command=check_changed, bg='#252527', fg='white')
+
+CheckPolicyIteration = IntVar(value=1)
+chk_policyIteration = Checkbutton(master=frm_mdp, text='Policy', variable=CheckPolicyIteration, onvalue=1,
+                                  offvalue=0, command=check_changed, bg='#252527', fg='white')
+
 CheckDeterministic = IntVar(value=1)
-chk_deterministic = Checkbutton(master=frm_mdp, text='Deterministic', variable=CheckDeterministic, onvalue=1, offvalue=0,
-                          command=check_changed, bg='#252527', fg='white')
+chk_deterministic = Checkbutton(master=frm_mdp, text='Deterministic', variable=CheckDeterministic, onvalue=1,
+                                offvalue=0, command=check_changed, bg='#252527', fg='white')
 
 
-btn_runMDP = Button(master=frm_mdp, text='RUN MARKOV', fg='green', command=run_search_mdp, width=12,
+btn_runMDP = Button(master=frm_mdp, text='RUN MARKOV', fg='green', command=run_search_mdp, width=19,
                     bg='#252527', highlightbackground='#252527')
 
-"""
-mazes_mdp = os.listdir('SavedMazes/MDP')
-listbox_MDP = Listbox(master=frm_mdp, height=len(mazes_mdp), selectforeground='#252527',
-                      selectbackground='#a7faa9', activestyle='none', exportselection=False)
-
-
-for maze in mazes_mdp:
-    listbox_MDP.insert(mazes_mdp.index(maze), maze)
-listbox_MDP.selection_set(0)
-listbox_MDP.bind('<<ListboxSelect>>', mdp_listbox)
-"""
 
 lbl_mdp.grid(column=0, row=0, sticky='nw')
 
 window.rowconfigure(1, weight=1)
-# listbox_MDP.grid(column=0, row=1, sticky='nw')
-chk_deterministic.grid(column=0, row=1, sticky='nw')
-btn_runMDP.grid(column=0, row=2, sticky='nsew')
+chk_valueIteration.grid(column=0, row=1, sticky='nw')
+chk_policyIteration.grid(column=1, row=1, sticky='nw')
+
+chk_deterministic.grid(column=0, row=2, sticky='nw')
+
+btn_runMDP.grid(column=0, row=3, sticky='nsew', columnspan=2)
 
 frm_mdp.grid(column=0, row=1, sticky='nsew', columnspan=1, padx=5, pady=4)
 # -------------------RUN-----------------------
