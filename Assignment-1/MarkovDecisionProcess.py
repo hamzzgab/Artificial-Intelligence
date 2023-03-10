@@ -129,6 +129,7 @@ class ValueIteration(MarkovDecisionProcess):
                         if bestNodeVal < self.utilities[tempNode]:
                             bestNode = tempNode
                             bestNodeVal = self.utilities[tempNode]
+
             self.explored.append(node)
             self.tracePath[node] = bestNode
             node = bestNode
