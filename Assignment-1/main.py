@@ -121,9 +121,8 @@ if gui.run_mdp_algo:
         pathVI, timeVI = trackVI.create_searchPath((rows, cols))
 
         timeVI += get_time(trackVI.calculate_valueIteration)
-
-        totalVIPath = textLabel(m, f'Value Iteration Path', len(pathVI) + 1)
         totalVITime = textLabel(m, f'Value Iteration Time', round(timeVI, 4))
+        totalVIPath = textLabel(m, f'Value Iteration Path', len(pathVI) + 1)
 
     if gui.SetPolicyIteration:
         trackPI = PolicyIteration(m, GOAL, isDeterministic=setDeterministic)
