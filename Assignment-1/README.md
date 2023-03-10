@@ -79,6 +79,10 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 3. Time Taken - 0.0008
 <img height="400" src="./images/AStar.png"/>
 
+## Search Algorithms Running Together
+<img height="400" src="./images/BDA.png"/>
+
+
 ## Markov Decision Process
 To run the select the checkboxes from the Search Algorithm section and click on the Run Markov button. It will run the selected algorithm using the rows, cols as the grid size and the reach to the specified goal.
 - Select any algorithm from the checkboxes
@@ -87,7 +91,7 @@ To run the select the checkboxes from the Search Algorithm section and click on 
 <img src="./images/GUI-MDP.png" height="400">
 
 #### Analysis Parameters
-To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
+To compare the 2 algorithms I have used 2 metrics, displayed on top of the maze
 1. Final Path 
 2. Time Taken
 
@@ -101,3 +105,6 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 1. Final Path - 49
 2. Time Taken - 1.1663
 <img height="400" src="./images/PI.png"/>
+
+## MDP Algorithms Running Together
+<img height="400" src="./images/VP.png"/>

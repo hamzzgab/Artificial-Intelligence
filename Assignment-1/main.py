@@ -143,7 +143,6 @@ if gui.run_mdp_algo:
     tracingDict = {}
     for i, val in enumerate([pathVI, pathPI]):
         if val is not None:
-            print(val, i)
             tracingDict[agents[i]] = val
 
     # ----------------TRACING--------------------

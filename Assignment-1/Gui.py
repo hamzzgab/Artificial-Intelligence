@@ -20,7 +20,8 @@ def set_values():
     rows, cols = ent_rows.get(), ent_cols.get()
     goal_x, goal_y = ent_goalX.get(), ent_goalY.get()
 
-    global SetDeterministic, SetPolicyIteration, SetValueIteration
+    global AlgoRun, SetDeterministic, SetPolicyIteration, SetValueIteration
+    AlgoRun = [CheckRunDFS.get(), CheckRunBFS.get(), CheckRunAStar.get()]
     SetDeterministic = CheckDeterministic.get()
     SetValueIteration = CheckValueIteration.get()
     SetPolicyIteration = CheckPolicyIteration.get()
