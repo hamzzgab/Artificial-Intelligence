@@ -30,7 +30,7 @@ class MazeRunner:
         self.m.run()
 
     def trace_path(self, runner=None, path=None):
-        self.m.tracePath({runner: self.m.path}, delay=self.delay)
+        self.m.tracePath({runner: path}, delay=self.delay)
         self.run()
 
 
@@ -39,4 +39,4 @@ MazeRunner = MazeRunner((5, 5), {'x': 1, 'y': 1}, loopPercent=100, saveMaze=Fals
 MazeRunner.create_maze()
 runner = MazeRunner.create_agent(shape='square', footprints=True, filled=False)
 MazeRunner.add_text(text='hello', value=3)
-MazeRunner.trace_path(runner)
+MazeRunner.trace_path(runner, path=[(3, 2), (2, 2)])
