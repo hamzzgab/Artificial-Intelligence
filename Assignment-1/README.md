@@ -84,7 +84,7 @@ To run the select the checkboxes from the Search Algorithm section and click on 
 - Select any algorithm from the checkboxes
 - Click on `RUN MARKOV`
 - The code will open a new window on which the search algorithm will run
-<img src="./images/GUI-DFS.png" height="400">
+<img src="./images/GUI-MDP.png" height="400">
 
 #### Analysis Parameters
 To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
@@ -93,11 +93,11 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 
 ### 1. Value Iteration
 1. Final Path - 49
-2. Time Taken - 1.0203
+2. Time Taken - 1.021
 <img height="400" src="./images/VI.png"/>
 
 
 ### 2. Policy Iteration
 1. Final Path - 49
-2. Time Taken - 1.1662
+2. Time Taken - 1.1663
 <img height="400" src="./images/PI.png"/>
