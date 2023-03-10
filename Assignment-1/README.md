@@ -78,3 +78,26 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 2. Searched Path - 691
 3. Time Taken - 0.0008
 <img height="400" src="./images/AStar.png"/>
+
+## Markov Decision Process
+To run the select the checkboxes from the Search Algorithm section and click on the Run Markov button. It will run the selected algorithm using the rows, cols as the grid size and the reach to the specified goal.
+- Select any algorithm from the checkboxes
+- Click on `RUN MARKOV`
+- The code will open a new window on which the search algorithm will run
+<img src="./images/GUI-DFS.png" height="400">
+
+#### Analysis Parameters
+To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
+1. Final Path 
+2. Time Taken
+
+### 1. Value Iteration
+1. Final Path - 49
+2. Time Taken - 1.0203
+<img height="400" src="./images/VI.png"/>
+
+
+### 2. Policy Iteration
+1. Final Path - 49
+2. Time Taken - 1.1662
+<img height="400" src="./images/PI.png"/>
