@@ -49,9 +49,19 @@ The selected algorithms will run together
 
 To run the select the checkboxes from the Search Algorithm section and click on the Run Algos button. It will run the selected algorithm using the rows, cols as the grid size and the reach to the specified goal.
 
+#### Analysis Parameters
+To compare the 3 algorithms I have used 3 metrics
+1. Final Path
+2. Searched Path
+3. Time Taken
+
 #### 1. Depth First Search
 - Select only the DFS checkbox
 - Click on `RUN ALGOS`
 
 <img src="./images/GUI-DFS.png" height="400">
+
+- The code will open a new window on which the DFS Algorithm will run
+<img height="400" src="./images/DFS.png"/>
+
 

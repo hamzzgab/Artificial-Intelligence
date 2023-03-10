@@ -21,7 +21,7 @@ m.CreateMaze(x=goal_x, y=goal_y, pattern=None,
 
 if gui.run_search_algos:
     # -----------------ALGO----------------------
-    Algo.NODES = 'EWSN'
+    Algo.NODES = 'ESNW'
 
     dfsPath = None
     bfsPath = None
