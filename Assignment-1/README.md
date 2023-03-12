@@ -119,3 +119,15 @@ To compare the 2 algorithms I have used 2 metrics, displayed on top of the maze
 <div align="center">
 <img height="400" src="./images/VP.png"/>
 </div>
+
+
+## References
+[1] MAN1986, (2021) pyamaze [Source Code] https://github.com/MAN1986/pyamaze
+
+[2] Paul E. Black, "Manhattan distance", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 11 February 2019. Available from: https://www.nist.gov/dads/HTML/manhattanDistance.html
+
+[3] Paul E. Black, "Euclidean distance", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 17 December 2004. Available from: https://www.nist.gov/dads/HTML/euclidndstnc.html
+
+[4] Russell, S.J. and Norvig, P. (2022) Artificial Intelligence: A modern approach. Harlow: Pearson Education Limited. 
+
+
