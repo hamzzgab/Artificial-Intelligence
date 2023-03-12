@@ -26,7 +26,9 @@ The code will display a _GUI_ where parameters can be changed such as:
 2. Goal Location
 3. The algorithms to run together
 
+<div align="center">
 <img src="./images/GUI.png" height="400">
+</div>
 
 ### Defaults
 Grid:
@@ -51,8 +53,9 @@ To run the select the checkboxes from the Search Algorithm section and click on 
 - Select any algorithm from the checkboxes
 - Click on `RUN ALGOS`
 - The code will open a new window on which the search algorithm will run
-
+<div align="center">
 <img src="./images/GUI-DFS.png" height="400">
+</div>
 
 #### Analysis Parameters
 To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
@@ -66,13 +69,19 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 </div>
 
 ### 2. Breadth First Search
+<div align="center">
 <img height="400" src="./images/BFS.png"/>
+</div>
 
 ### 3. AStar
+<div align="center">
 <img height="400" src="./images/AStar.png"/>
+</div>
 
 ## Search Algorithms Running Together
+<div align="center">
 <img height="400" src="./images/BDA.png"/>
+</div>
 
 
 ## Markov Decision Process
@@ -80,7 +89,9 @@ To run the select the checkboxes from the Search Algorithm section and click on 
 - Select any algorithm from the checkboxes
 - Click on `RUN MARKOV`
 - The code will open a new window on which the search algorithm will run
+<div align="center">
 <img src="./images/GUI-MDP.png" height="400">
+</div>
 
 #### Analysis Parameters
 To compare the 2 algorithms I have used 2 metrics, displayed on top of the maze
@@ -88,11 +99,17 @@ To compare the 2 algorithms I have used 2 metrics, displayed on top of the maze
 2. Time Taken
 
 ### 1. Value Iteration
+<div align="center">
 <img height="400" src="./images/VI.png"/>
+</div>
 
 
 ### 2. Policy Iteration
+<div align="center">
 <img height="400" src="./images/PI.png"/>
+</div>
 
 ## MDP Algorithms Running Together
+<div align="center">
 <img height="400" src="./images/VP.png"/>
+</div>
