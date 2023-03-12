@@ -61,22 +61,14 @@ To compare the 3 algorithms I have used 3 metrics, displayed on top of the maze
 3. Time Taken
 
 ### 1. Depth First Search
-1. Final Path - 53
-2. Searched Path - 626
-3. Time Taken - 0.0067s
+<div align="center">
 <img height="400" src="./images/DFS.png"/>
-
+</div>
 
 ### 2. Breadth First Search
-1. Final Path - 49
-2. Searched Path - 625
-3. Time Taken - 0.0002
 <img height="400" src="./images/BFS.png"/>
 
 ### 3. AStar
-1. Final Path - 49
-2. Searched Path - 691
-3. Time Taken - 0.0008
 <img height="400" src="./images/AStar.png"/>
 
 ## Search Algorithms Running Together
@@ -96,14 +88,10 @@ To compare the 2 algorithms I have used 2 metrics, displayed on top of the maze
 2. Time Taken
 
 ### 1. Value Iteration
-1. Final Path - 49
-2. Time Taken - 1.021
 <img height="400" src="./images/VI.png"/>
 
 
 ### 2. Policy Iteration
-1. Final Path - 49
-2. Time Taken - 1.1663
 <img height="400" src="./images/PI.png"/>
 
 ## MDP Algorithms Running Together
