@@ -2,7 +2,13 @@
 
 For the purpose of this assignment I have used the open source [github](https://github.com/MAN1986/pyamaze) repository `pyamaze`. The demonstration for running the code can be found [here](https://youtu.be/BCsvA1Ct6gw)
 
+<p align='center'>
+  <a href="http://www.youtube.com/watch?feature=player_embedded&v=BCsvA1Ct6gw" target="_blank">
+      <img src="http://img.youtube.com/vi/BCsvA1Ct6gw/0.jpg" alt="Assignment-1 Artificial Intelligence" width="240" height="180" border="10" />
+  </a>
+<p>
 
+  
 ## Documentation
 ```
 https://github.com/hamzzgab/Artificial-Intelligence.git # CLONE
