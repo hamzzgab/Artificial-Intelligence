@@ -1,6 +1,6 @@
 # Search and MDPs
 
-For the purpose of this assignment I have used the open source [github](https://github.com/MAN1986/pyamaze) repository `pyamaze`
+For the purpose of this assignment I have used the open source [github](https://github.com/MAN1986/pyamaze) repository `pyamaze`. The demonstration for running the code can be found [here](https://youtu.be/BCsvA1Ct6gw)
 
 
 ## Documentation
