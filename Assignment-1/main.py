@@ -7,17 +7,12 @@ import Gui as gui
 rows, cols = grid = (int(gui.rows), int(gui.cols))
 goal_x, goal_y = GOAL = (int(gui.goal_x), int(gui.goal_y))
 
-
-def get_time(function):
-    return timeit.timeit(function, number=1000, globals=globals())
-
-
 # -----------------MAZE----------------------
 m = maze(rows=rows, cols=cols)
 m.CreateMaze(x=goal_x, y=goal_y, pattern=None,
-             theme=COLOR.light, loopPercent=0)
-# saveMaze=True)
-# loadMaze=f'SavedMazes/Algorithms/{gui.AlgoMaze}')
+             theme=COLOR.light, loopPercent=100)
+             # saveMaze=True)
+             # loadMaze='/Users/hamzz/PycharmProjects/MScAVR/Artificial Intelligence/maze-25x25.csv')
 
 if gui.run_search_algos:
     # -----------------ALGO----------------------
@@ -43,8 +38,6 @@ if gui.run_search_algos:
 
             agents[0] = d
 
-            # calcDFSTime = round(get_time(DFS.search_path) + get_time(DFS.get_forward_path), 4)
-
             totalDFSPath = textLabel(m, f'DFS Path', len(dfsPath) + 1)
             totalDFSSearchedPath = textLabel(m, f'DFS Searched Path', dfsSearchedPath)
             totalDFSTime = textLabel(m, f'DFS Time', round(calcDFSTime * 1000, 4))
@@ -62,8 +55,6 @@ if gui.run_search_algos:
                       color=COLOR.red)
 
             agents[1] = b
-
-            # calcBFSTime = round(get_time(BFS.search_path) + get_time(BFS.get_forward_path), 4)
 
             totalBFSPath = textLabel(m, f'BFS Path', len(bfsPath) + 1)
             totalBFSSearchedPath = textLabel(m, f'BFS Searched Path', bfsSearchedPath)
@@ -83,8 +74,6 @@ if gui.run_search_algos:
 
             agents[2] = a
 
-            # calcAStarTime = round(get_time(AStar.search_path) + get_time(AStar.get_forward_path), 4)
-
             totalAStarPath = textLabel(m, f'A* Path', len(aStarPath) + 1)
             totalAStarSearchedPath = textLabel(m, f'A* Searched Path', aStarSearchedPath)
             totalAStarTime = textLabel(m, f'A* Time', round(calcAStarTime * 1000, 4))
@@ -96,7 +85,7 @@ if gui.run_search_algos:
 
     # ----------------TRACING--------------------
     m.tracePath(tracingDict,
-                delay=100, kill=False,
+                delay=2, kill=False,
                 showMarked=True)
     m.run()
 
@@ -111,6 +100,7 @@ if gui.run_mdp_algo:
     pathPI = None
     # -----------------PATH----------------------
     if gui.SetValueIteration:
+        print(GOAL)
         trackVI = ValueIteration(m, GOAL, isDeterministic=setDeterministic)
         trackVI.calculate_valueIteration()
 
@@ -120,10 +110,8 @@ if gui.run_mdp_algo:
 
         pathVI, timeVI = trackVI.create_searchPath((rows, cols))
 
-        timeVI += get_time(trackVI.calculate_valueIteration)
-
         totalVIPath = textLabel(m, f'Value Iteration Path', len(pathVI) + 1)
-        totalVITime = textLabel(m, f'Value Iteration Time', round(timeVI, 4))
+        totalVITime = textLabel(m, f'Value Iteration Time', round(timeVI * 1000, 4))
 
     if gui.SetPolicyIteration:
         trackPI = PolicyIteration(m, GOAL, isDeterministic=setDeterministic)
@@ -135,10 +123,8 @@ if gui.run_mdp_algo:
 
         pathPI, timePI = trackPI.create_searchPath((rows, cols))
 
-        timePI += get_time(trackPI.calculate_policyIteration)
-
         totalPIPath = textLabel(m, f'Policy Iteration Path', len(pathPI) + 1)
-        totalPITime = textLabel(m, f'Policy Iteration Time', round(timePI, 4))
+        totalPITime = textLabel(m, f'Policy Iteration Time', round(timePI * 1000, 4))
 
     tracingDict = {}
     for i, val in enumerate([pathVI, pathPI]):

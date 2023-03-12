@@ -105,22 +105,23 @@ btn_runAlgos = Button(master=frm_maze, text='RUN ALGOS', fg='green', command=set
 lbl_maze.grid(row=0, column=0, columnspan=2, sticky='nw')
 
 #   | ROW COL
-lbl_rows.grid(row=1, column=0, sticky=W, pady=2)
-ent_rows.grid(row=1, column=1, pady=2)
+lbl_gridSize.grid(row=1, column=0, columnspan=2, sticky=W, pady=10)
+lbl_rows.grid(row=2, column=0, sticky=W, pady=2)
+ent_rows.grid(row=2, column=1, pady=2)
 
-lbl_cols.grid(row=2, column=0, sticky=W, pady=2)
-ent_cols.grid(row=2, column=1, pady=2)
+lbl_cols.grid(row=3, column=0, sticky=W, pady=2)
+ent_cols.grid(row=3, column=1, pady=2)
 
 #   | GOAL
-lbl_goal.grid(row=3, column=0, columnspan=2, sticky=W, pady=10)
+lbl_goal.grid(row=4, column=0, columnspan=2, sticky=W, pady=10)
 
-lbl_goalX.grid(row=4, column=0, sticky=W, pady=2)
-ent_goalX.grid(row=4, column=1, pady=2, sticky=E)
+lbl_goalX.grid(row=5, column=0, sticky=W, pady=2)
+ent_goalX.grid(row=5, column=1, pady=2, sticky=E)
 
-lbl_goalY.grid(row=5, column=0, sticky=W, pady=2)
-ent_goalY.grid(row=5, column=1, pady=2, sticky=E)
+lbl_goalY.grid(row=6, column=0, sticky=W, pady=2)
+ent_goalY.grid(row=6, column=1, pady=2, sticky=E)
 
-lbl_gridSize.grid(row=6, column=0, columnspan=2, sticky=W, pady=10)
+
 # listbox_Algos.grid(row=7, column=0, columnspan=2)
 
 frm_maze.grid(column=0, row=0, sticky='nsew', padx=5)

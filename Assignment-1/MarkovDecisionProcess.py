@@ -7,7 +7,7 @@ class MarkovDecisionProcess:
         self.goal = goal
         self.actions = {}
 
-        self._discount = 0.8
+        self._discount = 0.9
 
         self.isDeterministic = isDeterministic
         self.create_actions()
@@ -62,79 +62,83 @@ class ValueIteration(MarkovDecisionProcess):
         self._reward = -4  # LIVING REWARD
         self._max_error = 10 ** (-3)
 
-        self.utilities = self.target = [self.goal]
-        self.utilities = {state: 0 for state in self.actions.keys()}
-        self.utilities[self.target[0]] = 1
+        self.target = [self.goal]
+        self.values = {state: 0 for state in self.actions.keys()}
+        self.values[self.target[0]] = 1
 
-        self.policy_values = {}
-        self.tracePath = {}
+        self.algoPath = {}
 
         self.explored = []
-        # self.calculate_valueIteration()
+
+        self.mainTime = 0
 
     def get_maxDelta(self, delta, utilityMax, state):
-        return max(delta, abs(utilityMax - self.utilities[state]))
+        return max(delta, abs(utilityMax - self.values[state]))
 
     def calculate_valueIteration(self):
+        start = time.time()
         while True:
             delta = 0
             for state in self.actions.keys():
                 if state == self.target[0]:
                     continue
+                    
                 utilityMax = float("-inf")
-                actionMax = None
+                
                 for action, prob in self.actions[state].items():
                     for direction in action:
                         if self.m.maze_map[state][direction]:
-                            stateNext = self.move(state, direction)
+                            childCell = self.move(state, direction)
                     reward = self._reward
-                    if stateNext == self.target[0]:
+                    if childCell == self.target[0]:
                         reward = 10000
                     utility = 0
-                    # utility += prob * (reward + self._discount * self.utilities[stateNext])
-                    utility += super().calculate_ValueIterationUtility(prob, reward, stateNext, self.utilities)
+
+                    utility += super().calculate_ValueIterationUtility(prob, reward, childCell, self.values)
 
                     if utility > utilityMax:
                         utilityMax = utility
-                        actionMax = action
+                        
                 delta = self.get_maxDelta(delta, utilityMax, state)
 
-                self.utilities[state] = utilityMax
-                self.policy_values[state] = actionMax
+                self.values[state] = utilityMax
 
             if delta < self._max_error:
                 break
+        end = time.time()
+        self.mainTime = end-start
 
     def create_searchPath(self, currNode):
         start = time.time()
         node = currNode
 
         while True:
-            bestNode = None
-            bestNodeVal = None
+            selectedNode = None
+            selectedNodeVal = None
             if node == self.target[0]:
                 break
 
-            for direction in 'SNEW':
+            for direction in 'ENWS':
                 if self.m.maze_map[node][direction] and self.move(node, direction) not in self.explored:
-                    node_direction = self.move(node, direction)
-                    if node_direction == self.target[0]:
-                        bestNode = node_direction
+                    traverseDirection = self.move(node, direction)
+                    if traverseDirection == self.target[0]:
+                        selectedNode = traverseDirection
                         break
-                    if bestNodeVal is None:
-                        bestNode = node_direction
-                        bestNodeVal = self.utilities[bestNode]
+                    if selectedNodeVal is None:
+                        selectedNode = traverseDirection
+                        selectedNodeVal = self.values[selectedNode]
                     else:
-                        tempNode = node_direction
-                        if bestNodeVal < self.utilities[tempNode]:
-                            bestNode = tempNode
-                            bestNodeVal = self.utilities[tempNode]
+                        tempNode = traverseDirection
+                        if selectedNodeVal < self.values[tempNode]:
+                            selectedNode = tempNode
+                            selectedNodeVal = self.values[tempNode]
 
             self.explored.append(node)
-            self.tracePath[node] = bestNode
-            node = bestNode
+            self.algoPath[node] = selectedNode
+            node = selectedNode
         end = time.time()
-        return self.tracePath, end-start
+        self.mainTime = end-start
+        return self.algoPath, self.mainTime
 
 
 class PolicyIteration(MarkovDecisionProcess):
@@ -142,73 +146,66 @@ class PolicyIteration(MarkovDecisionProcess):
 
         super().__init__(m, goal, isDeterministic)
 
-        self._discount = 0.8
-        self.theta = 0.001
-
         self.target = [self.goal]
 
-        self.utilities = {state: 0 for state in self.actions.keys()}
-        self.utilities[self.target[0]] = pow(10, 7)
+        self.values = {state: 0 for state in self.actions.keys()}
+        self.values[self.target[0]] = pow(10, 7)
 
-        self.policy_values = {s: random.choice('N') for s in self.actions.keys()}
+        self.policyValues = {s: random.choice('N') for s in self.actions.keys()}
 
         self._reward = {state: -40 for state in self.actions.keys()}  # LIVING REWARD
         self._reward[self.target[0]] = pow(10, 8)
 
-        self.tracePath = {}
-
-        # self.calculate_policyIteration()
+        self.algoPath = {}
+        self.mainTime = 0
 
     def calculate_policyIteration(self):
-        isPolicyChanged = True
-        while isPolicyChanged:
-            isPolicyChanged = False
-            isValueChanged = True
+        start = time.time()
+        policyTrigger = True
+        while policyTrigger:
+            policyTrigger = False
+            valueTrigger = True
 
-            while isValueChanged:
-                delta = 0
-                isValueChanged = False
+            while valueTrigger:
+                valueTrigger = False
 
                 for state in self.actions.keys():
                     if state == self.target[0]:
                         continue
 
-                    old_action = self.policy_values[state]
-                    max_utility = float('-infinity')
-                    max_action = None
+                    utilityMax = float('-infinity')
+                    actionMax = None
 
                     for action, prob in self.actions[state].items():
                         for direction in action:
                             if self.m.maze_map[state][direction]:
-                                next_state = self.move(state, direction)
+                                childNode = self.move(state, direction)
 
-                        reward = self._reward[state]
-                        if next_state == self.target[0]:
-                            reward = pow(10, 9)
+                        utility = super().calculate_PolicyIterationUtility(prob, self._reward, state, childNode,
+                                                                           self.values)
 
-                        # utility = self._reward[state] + self._discount * (prob * self.utilities[next_state])
-                        utility = super().calculate_PolicyIterationUtility(prob, self._reward, state, next_state,
-                                                                           self.utilities)
+                        if utility > utilityMax:
+                            utilityMax = utility
+                            actionMax = action
 
-                        if utility > max_utility:
-                            max_utility = utility
-                            max_action = action
+                        self.policyValues[state] = actionMax
+                        self.values[state] = utilityMax
 
-                        self.policy_values[state] = max_action
-                        self.utilities[state] = max_utility
+                        if self.policyValues[state] != actionMax:
+                            policyTrigger = True
+                            self.policyValues[state] = actionMax
 
-                        if self.policy_values[state] != max_action:
-                            isPolicyChanged = True
-                            self.policy_values[state] = max_action
+        end = time.time()
+        self.mainTime = end-start
 
     def create_searchPath(self, currNode):
         start = time.time()
         node = currNode
 
         while node != self.target[0]:
-            test = self.move(node, self.policy_values[node])
-            self.tracePath[node] = test
-            node = test
+            nextNode = self.move(node, self.policyValues[node])
+            self.algoPath[node] = nextNode
+            node = nextNode
         end = time.time()
-
-        return self.tracePath, end-start
+        self.mainTime = end-start
+        return self.algoPath, self.mainTime
