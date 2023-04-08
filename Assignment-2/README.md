@@ -136,3 +136,9 @@ p2 = MinimaxPlayer('minimax')
 game = ConnectFourBoard(p1, p2)
 game.play
 ```
+
+# References
+[1] AttackingOrDefending, “python-tictactoe,” 2020. [Online]. Available: https://github.com/AttackingOrDefending/python-tictactoe
+
+[2] J. Zhang, “Reinforcement learning-implement tictactoe,” Aug 2019. [Online]. Available: https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542
+10 of 10
