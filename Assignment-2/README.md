@@ -6,9 +6,9 @@ For the purpose of this assignment I have used the open source [library](https:/
 
 | Action      | Command                                                  |
 |-------------|----------------------------------------------------------|
-| Clone       | `https://github.com/hamzzgab/Artificial-Intelligence.git` |
+| Clone       | `https://github.com/hamzzgab/Artificial-Intelligence.git`|
 | Main Folder | `cd Assignment-2`                                        |
-| Main Folder | `pip install -r requirements.txt`                                        |
+| Main Folder | `pip install -r requirements.txt`                        |
 
 If the requirements.txt doesn't work the `python-tictactoe` library can be simply installed by using
 ```
@@ -140,5 +140,8 @@ game.play
 # References
 [1] AttackingOrDefending, “python-tictactoe,” 2020. [Online]. Available: https://github.com/AttackingOrDefending/python-tictactoe
 
-[2] J. Zhang, “Reinforcement learning-implement tictactoe,” Aug 2019. [Online]. Available: https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542
-10 of 10
+[2] “Artificial intelligence: Alpha-beta pruning - javatpoint.” [Online]. Available: https://www.javatpoint.com/ai-alpha-beta-pruning
+
+[3] J. Zhang, “Reinforcement learning-implement tictactoe,” Aug 2019. [Online]. Available: https://towardsdatascience.com/reinforcement-learning-implement-tictactoe-189582bea542
+
+[4] S. J. Russell, P. Norvig, and E. Davis, Artificial Intelligence: A modern approach. Pearson Educaci ́on, 2022.
