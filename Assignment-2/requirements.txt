@@ -1,0 +1,1 @@
+python-tictactoe~=0.0.7
