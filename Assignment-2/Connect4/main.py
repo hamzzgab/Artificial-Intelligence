@@ -48,7 +48,7 @@ p1 = QLearningPlayer('Q1')
 p2 = QLearningPlayer('Q2')
 
 game = ConnectFourBoard(p1, p2)
-game.train(100000)
+game.train(500000)
 
 p1.savePolicy()
 p2.savePolicy()
