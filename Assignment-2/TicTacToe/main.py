@@ -47,5 +47,6 @@ game.play()
 
 p1 = DefaultPlayer('default')
 p2 = MinimaxPlayer('Q2')
+
 game = TicTacToe(p1, p2)
 game.play()
