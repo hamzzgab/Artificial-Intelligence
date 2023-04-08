@@ -17,6 +17,7 @@ pip install python-tictactoe
 
 ### Commands
 1. To run the code simply cd into the game folder for TicTacToe and Connect4 from the Assignment-2 folder
+2. It will display the game playing in the command line, the code for this project is not gamified.
 
 #### TicTacToe
 ```
@@ -24,11 +25,20 @@ cd TicTacToe
 python main.py
 ```
 
+![board](./images/3x3-board.png) 
+![board](./images/3x3-board-push.png)
+![board](./images/3x3-board-winner.png)
+
 #### Connect4
 ```
 cd Connect4
 python main.py
 ```
+
+![board](./images/6x7-board.png) 
+![board](./images/6x7-board-push.png)
+![board](./images/6x7-board-winner.png)
+
 
 
 ### Defaults
