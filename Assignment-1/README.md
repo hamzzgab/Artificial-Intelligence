@@ -10,11 +10,13 @@ For the purpose of this assignment I have used the open source [github](https://
 
   
 ## Documentation
-```
-https://github.com/hamzzgab/Artificial-Intelligence.git # CLONE
-cd Assignment-1                                        # MAIN FOLDER
-pip install -r requirements.txt                        # INSTALL
-```
+
+| Action      | Command                                                   |
+|-------------|-----------------------------------------------------------|
+| Clone       | `https://github.com/hamzzgab/Artificial-Intelligence.git` |
+| Main Folder | `cd Assignment-1`                                         |
+| Main Folder | `pip install -r requirements.txt`                         |
+
 
 If the requirements.txt doesn't work the `pyamaze` library can be simply installed by using
 ```
