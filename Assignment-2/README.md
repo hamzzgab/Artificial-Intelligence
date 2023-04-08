@@ -24,22 +24,21 @@ pip install python-tictactoe
 cd TicTacToe
 python main.py
 ```
-
-
+<p float="left">
 <img src="./images/3x3-board.png" width="100" height="100">
 <img src="./images/3x3-board-push.png" width="100" height="100">
 <img src="./images/3x3-board-winner.png" width="100" height="100">
-
+</p>
 #### Connect4
 ```
 cd Connect4
 python main.py
 ```
-
-<img src="./images/6x7-board.png" width="100" height="100">
-<img src="./images/6x7-board-push.png" width="100" height="100">
-<img src="./images/6x7-board-winner.png" width="100" height="100">
-
+<p float="left">
+<img src="./images/6x7-board.png" width="200" height="200">
+<img src="./images/6x7-board-push.png" width="200" height="200">
+<img src="./images/6x7-board-winner.png" width="200" height="200">
+</p>
 
 
 ### Defaults
