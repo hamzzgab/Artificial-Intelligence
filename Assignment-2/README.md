@@ -25,9 +25,10 @@ cd TicTacToe
 python main.py
 ```
 
-![board](./images/3x3-board.png) 
-![board](./images/3x3-board-push.png)
-![board](./images/3x3-board-winner.png)
+
+<img src="./images/3x3-board.png" width="100" height="100">
+<img src="./images/3x3-board-push.png" width="100" height="100">
+<img src="./images/3x3-board-winner.png" width="100" height="100">
 
 #### Connect4
 ```
@@ -35,9 +36,9 @@ cd Connect4
 python main.py
 ```
 
-![board](./images/6x7-board.png) 
-![board](./images/6x7-board-push.png)
-![board](./images/6x7-board-winner.png)
+<img src="./images/6x7-board.png" width="100" height="100">
+<img src="./images/6x7-board-push.png" width="100" height="100">
+<img src="./images/6x7-board-winner.png" width="100" height="100">
 
 
 
