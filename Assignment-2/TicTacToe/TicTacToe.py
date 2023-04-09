@@ -160,8 +160,7 @@ class DefaultPlayer:
     def __init__(self, name='default'):
         self.name = name
 
-    @staticmethod
-    def getWinningMove(board, turn):
+    def getWinningMove(self, board, turn):
         for move in board.possible_moves():
             temp_board = board.copy()
             temp_board.push(tuple(move))
@@ -169,8 +168,7 @@ class DefaultPlayer:
                 return move
         return None
 
-    @staticmethod
-    def blockWinningMove(board, turn):
+    def blockWinningMove(self, board, turn):
         opponent_turn = turn % 2 + 1
         for move in board.possible_moves():
             temp_board = board.copy()

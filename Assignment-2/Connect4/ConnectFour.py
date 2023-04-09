@@ -184,7 +184,6 @@ class HumanPlayer:
     def __init__(self, name='human'):
         self.name = name
 
-    @staticmethod
     def getMove(self, positions, board):
         while True:
             col = int(input('Enter col: '))
