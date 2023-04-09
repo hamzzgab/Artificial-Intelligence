@@ -44,9 +44,21 @@ game = TicTacToe(p1, p2)
 game.play()    
 """
 
+# TRAINING
+# p1 = QLearningPlayer('demo-Q1')
+# p2 = QLearningPlayer('demo-Q2')
+#
+# game = TicTacToe(p1, p2)
+# game.train(5)
+#
+# p1.savePolicy()
+# p2.savePolicy()
 
-p1 = DefaultPlayer('default')
-p2 = MinimaxPlayer('Q2')
+# LOADING
+p1 = QLearningPlayer('Q1', epsilon=0)
+p1.loadPolicy('policy_QLearning-1')
+p2 = DefaultPlayer()
 
 game = TicTacToe(p1, p2)
 game.play()
+
