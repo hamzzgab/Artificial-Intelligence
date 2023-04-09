@@ -4,11 +4,11 @@ For the purpose of this assignment I have used the open source [library](https:/
 
 ## Documentation
 
-| Action      | Command                                                  |
-|-------------|----------------------------------------------------------|
-| Clone       | `https://github.com/hamzzgab/Artificial-Intelligence.git`|
-| Main Folder | `cd Assignment-2`                                        |
-| Main Folder | `pip install -r requirements.txt`                        |
+| Action      | Command                                                   |
+|-------------|-----------------------------------------------------------|
+| Clone       | `https://github.com/hamzzgab/Artificial-Intelligence.git` |
+| Main Folder | `cd Assignment-2`                                         |
+| Main Folder | `pip install -r requirements.txt`                         |
 
 If the requirements.txt doesn't work the `python-tictactoe` library can be simply installed by using
 ```

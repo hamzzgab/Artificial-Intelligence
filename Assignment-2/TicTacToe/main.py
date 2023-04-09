@@ -57,7 +57,12 @@ game.play()
 # LOADING
 p1 = QLearningPlayer('Q1', epsilon=0)
 p1.loadPolicy('policy_QLearning-1')
+
 p2 = DefaultPlayer()
+# p2 = RandomPlayer()
+# p2 = MinimaxPlayer()
+# p2 = HumanPlayer()
+
 
 game = TicTacToe(p1, p2)
 game.play()

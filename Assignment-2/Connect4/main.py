@@ -44,9 +44,23 @@ game.play()
 ConnectFour.ROWS = 6
 ConnectFour.COLS = 7
 
+# TRAINING
+# p1 = QLearningPlayer('demo-Q1')
+# p2 = QLearningPlayer('demo-Q2')
+#
+# game = ConnectFourBoard(p1, p2)
+# game.train(5)
+#
+# p1.savePolicy()
+# p2.savePolicy()
+
+
 p1 = QLearningPlayer('Q1', epsilon=0)
 p1.loadPolicy('policy_Q1-6x7')
+
 p2 = RandomPlayer()
+# p2 = MinimaxPlayer()
+# p2 = HumanPlayer()
 
 game = ConnectFourBoard(p1, p2)
 game.play()
