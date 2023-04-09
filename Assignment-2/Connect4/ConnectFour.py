@@ -56,26 +56,16 @@ class ConnectFourBoard:
         self.boardHash = None
 
     def displayBoard(self):
-        print('-' * 19)
+        print('-' * 23)
         print(self.board)
-        print('-' * 19)
+        print('-' * 23)
 
     def getBoard(self):
         self.boardHash = str(self.board.board.flatten())
         return self.boardHash
 
     def getWinner(self):
-        if self.board.result() == 1:
-            self.isEnd = True
-            return self.board.result()
-        if self.board.result() == 2:
-            self.isEnd = True
-            return self.board.result()
-        if self.board.result() == 0:
-            self.isEnd = True
-            return self.board.result()
-        self.isEnd = False
-        return None
+        return self.board.result()
 
     def getPositions(self):
         return self.board.possible_moves()

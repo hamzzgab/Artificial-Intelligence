@@ -29,18 +29,7 @@ class TicTacToe:
         return self.boardHash
 
     def getWinner(self):
-        # print(self.board.result())
-        if self.board.result() == 1:
-            self.isEnd = True
-            return self.board.result()
-        if self.board.result() == 2:
-            self.isEnd = True
-            return self.board.result()
-        if self.board.result() == 0:
-            self.isEnd = True
-            return self.board.result()
-        self.isEnd = False
-        return None
+        return self.board.result()
 
     def getPositions(self):
         return self.board.possible_moves()
@@ -268,7 +257,7 @@ class QLearningPlayer:
         self.gamma = gamma
         self.Q_table = {}
 
-    def getHash(board):
+    def getHash(self, board):
         boardHash = str(board.board.flatten())
         return boardHash
 
